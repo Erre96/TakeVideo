@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:video_play_test/video_player.dart';
 import 'package:video_play_test/exercise_box.dart';
 import 'package:video_play_test/my_colors.dart';
-import 'package:video_play_test/audio_player.dart';
+import 'package:video_play_test/audio_players_test.dart';
 
 void main() {
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: new MyHomePageState(),
+    home: new ExerciseListPage(),
   ));
 }
 
@@ -24,7 +24,7 @@ class ExerciseListPage extends StatelessWidget {
       body: SingleChildScrollView(
         //padding: EdgeInsets.fromLTRB(10, 100, 10, 100),
         child: Column(children: <Widget>[
-          new VideoPlayerApp(),
+          new ExampleApp(),
           new ExerciseBox('Övning 1'),
           new ExerciseBox('Övning 2'),
           new ExerciseBox('Övning 3'),
@@ -45,7 +45,17 @@ class ExerciseInContent extends StatelessWidget {
         title: Text('Introduktion'),
       ),
       body: Container(
-        child: VideoPlayerApp(),
+        child: Column(
+          children: <Widget>[
+            new VideoPlayerApp(),
+            new Padding(padding: EdgeInsets.symmetric(vertical: 10),
+            child: Container(
+              child: Text('Beskrivning av övningen är följande...',style: TextStyle(color: Colors.white),),),
+            ),
+          ]
+          ,)
+
+
       ),
     );
   }
