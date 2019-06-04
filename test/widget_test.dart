@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:video_play_test/main.dart';
 import 'package:video_play_test/video_player.dart';
 
 void main() {
