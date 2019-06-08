@@ -77,15 +77,6 @@ class _ExampleAppState extends State<ExampleApp> {
                 playRemote();
             },
           ),
-          new Slider(
-            min: 0,
-            max : 100,
-            divisions: 100,
-            value: sliderValue,
-            activeColor: MyColors.primary,
-            inactiveColor: MyColors.secondaryVariant,
-            //onChanged: (),
-          )
         ],
       ),
     );

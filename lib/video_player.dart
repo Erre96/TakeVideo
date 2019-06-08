@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'my_colors.dart';
 
 void main() => runApp(VideoPlayerApp());
 
@@ -10,7 +11,7 @@ class VideoPlayerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: VideoPlayerScreen(),
-    );
+    );  
   }
 }
 
@@ -24,6 +25,9 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
+  double sliderValue = 0;
+  int totalDurationSeconds = 10;
+  bool finishedLoading;
 
   @override
   void initState() {
@@ -61,6 +65,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       new FutureBuilder(
         future: _initializeVideoPlayerFuture,
         builder: (context, snapshot) {
+           if(finishedLoading == false){
+              setState(() {
+                finishedLoading = true;
+                totalDurationSeconds = _controller.value.duration.inSeconds;
+            });
+           }
           if (snapshot.connectionState == ConnectionState.done) {
             // If the VideoPlayerController has finished initialization, use
             // the data it provides to limit the Aspect Ratio of the Video
@@ -95,6 +105,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
         ),
       ),
+
+          new Slider(
+            min: 0,
+            max : totalDurationSeconds.toDouble(),
+            divisions: totalDurationSeconds,
+            value: sliderValue,
+            activeColor: MyColors.primary,
+            inactiveColor: MyColors.secondaryVariant,
+            onChanged: (newValue)
+            {
+              setState(() {
+                sliderValue = newValue;
+                if(sliderValue >= 0.0 && sliderValue >= 0.0)
+                {
+                  _controller.seekTo(Duration(seconds: sliderValue.toInt()));
+                }
+              });
+            },
+          ),
        // This trailing comma makes auto-formatting nicer for build methods.
         ]
       ),

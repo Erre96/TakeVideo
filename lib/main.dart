@@ -52,6 +52,7 @@ class ExerciseInContent extends StatelessWidget {
             child: Container(
               child: Text('Beskrivning av övningen är följande...',style: TextStyle(color: Colors.white),),),
             ),
+            new ExampleApp(),
           ]
           ,)
 
